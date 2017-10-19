@@ -35,11 +35,7 @@ evaluateAccuracy <- function(aPassagerId, aIsPositive){
         return(NULL)
        
     data.frame(PassengerId = as.integer(as.character(aPassagerId)),
-<<<<<<< HEAD
                Survived = as.integer(as.character(aIsPositive))) %>%        
-=======
-               Survived = as.integer(aIsPositive)) %>%        
->>>>>>> c4978355d8d88075fe2623e572fe1fad46af5884
         left_join(.df_GroundTruth, by = 'PassengerId') -> 
         ret
     
