@@ -8,7 +8,7 @@ library(microbenchmark)
 # Set up dir ------------------------------------------------------------------
 DIR_PRJBASE <- 'D:/daSpace/workshop/Kaggle/Titanic/shop'
 
-DIR_SCRIPT <- file.path(DIR_PRJBASE, 'code')
+DIR_SCRIPT <- file.path(DIR_PRJBASE, 'script')
 setwd(DIR_SCRIPT)
 
 DIR_INPUT <- file.path(DIR_PRJBASE, 'input')
