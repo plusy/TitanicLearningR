@@ -10,7 +10,7 @@ VAR_BEFORE <- ls()
 
 
 # Localize working data frame ---------------------------------------------
-df_working <- DF_Data_0_ALL
+df_working <- getCleanBaseDf()
 
 trainData <- df_working %>% filter(DataTag==DATA_TAG_TRAIN)
 testData <- df_working %>% filter(DataTag==DATA_TAG_TEST)
@@ -48,3 +48,9 @@ barplot(Pclass_survival, xlab = "Cabin Class", ylab = "Number of People", main =
 Pclass_survival[2]/(Pclass_survival[1] + Pclass_survival[2])  #1st Class Survival Rate
 table(trainData$Survived, trainData$Pclass)
 prop.table(table(trainData$Survived, trainData$Pclass),2)
+
+
+
+# Clean up ----------------------------------------------------------------
+rm(list = setdiff(ls(), VAR_BEFORE))
+

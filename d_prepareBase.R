@@ -71,7 +71,8 @@ df_RawInput_Train$DataTag <- DATA_TAG_TRAIN
 
 df_RawInput_Test <- read_csv(FILE_SRC_DATA_RAW_TEST)
 df_RawInput_Test$DataTag <- DATA_TAG_TEST
-df_RawInput_Test$Survived <- DATA_DEFALUT_Survived_Dummy
+df_RawInput_Test$Survived <- NA
+
 
 df_RawInput <- rbind(df_RawInput_Train,df_RawInput_Test)
 
@@ -99,26 +100,26 @@ df_working%>%
 
 
 #Cabin ----------------------------------------------------------
-df_working%>% 
+df_working%>%
     mutate(Cabin = coalesce(Cabin, "")) ->
     df_working
 
-for(cab in LETTERS[1:7]){ # 1:7 -> A:G 
+for(cab in LETTERS[1:7]){ # 1:7 -> A:G
     df_working[paste0("Cabin_",cab)] <- factor(grepl(cab,df_working$Cabin))
 }
 
-df_working%>% 
-    mutate(Cabin_Length = nchar(Cabin), 
-           Cabin_Section = factor(if_else(Cabin_Length==0, 
+df_working%>%
+    mutate(Cabin_Length = nchar(Cabin),
+           Cabin_Section = factor(if_else(Cabin_Length==0,
                                           0,
                                           str_count(df_working$Cabin, ' ') + 1))) ->
     df_working
 
-df_working%>% 
+df_working%>%
     separate(Cabin, sep = " ",
-             into = c("Cabin_Number"), extra = "drop", remove = FALSE) %>% 
-    mutate(Cabin_Number = coalesce(as.integer(str_replace(Cabin_Number, "[[:alpha:]]", "")), as.integer(0))) %>% 
-    mutate(Cabin_NumberOE = factor(if_else(is.na(Cabin_Number), -1, Cabin_Number%%2)))->
+             into = c("Cabin_Number"), extra = "drop", remove = FALSE) %>%
+    mutate(Cabin_Number = coalesce(as.integer(str_replace(Cabin_Number, "[[:alpha:]]", "")), as.integer(0))) %>%
+    mutate(Cabin_NumberOE = factor(if_else(is.na(Cabin_Number), -1, Cabin_Number%%2))) ->
     df_working
 
 
@@ -153,6 +154,11 @@ df_working%>%
 
 
 
+# Save clean data ---------------------------------------------------------
+saveRDS(df_working, file = FILE_CLEAN_DATA_BASE_RDS)
+write_csv(df_working, FILE_CLEAN_DATA_BASE_CSV)
+
+
 # Prepare ground Truth ----------------------------------------------------
 # Groud truth data from http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic3.csv
 # Two dup name: Kelly, Mr. James and Connolly, Miss. Kate
@@ -173,11 +179,5 @@ stopifnot(nrow(df_GroundTruth)==nrow(df_working))
 write_csv(df_GroundTruth, FILE_CLEAN_DATA_GROUND_TRUTH)
 
 
-# Save clean data ---------------------------------------------------------
-saveRDS(df_working, file = FILE_CLEAN_DATA_BASE_RDS)
-write_csv(df_working, FILE_CLEAN_DATA_BASE_CSV)
-
-
 # Clean up ----------------------------------------------------------------
 rm(list = setdiff(ls(), VAR_BEFORE))
-

@@ -10,7 +10,7 @@ VAR_BEFORE <- ls()
 #library(randomForest)
 
 # Localize working data frame ---------------------------------------------
-df_working <- DF_Data_0_ALL
+df_working <- getCleanBaseDf()
 
 
 # Cleaning the Training Data ----------------------------------------------

@@ -13,7 +13,7 @@ library(lattice)
 
 
 # Localize working data frame ---------------------------------------------
-df_working <- DF_Data_0_ALL
+df_working <- getCleanBaseDf()
 
 
 # Age ---------------------------------------------------------------------

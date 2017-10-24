@@ -14,7 +14,7 @@ library(ipred) # has cross validation
 
 
 # Localize working data frame ---------------------------------------------
-df_working <- DF_Data_0_ALL
+df_working <- getCleanBaseDf()
 
 df_working%>% 
     mutate(Embarked_Ranger = ifelse(Embarked =='N/A',

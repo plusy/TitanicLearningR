@@ -34,13 +34,26 @@ AGE_BIN_CUTOFF <- c(0,2,5,9,12,15,21,55,65,100)
 DATA_TAG_TRAIN <- 'Train'
 DATA_TAG_TEST <- 'Test'
 
-# Only need to process once
-# source('d_prepareBase.R', local= TRUE)
+
+# Load data ---------------------------------------------------------------
+getCleanBaseDf <- function(reprocess = FALSE){
+    if(reprocess){# Only need to process once
+        source('d_prepareBase.R', local= TRUE)
+    }
+    
+    return(readRDS(FILE_CLEAN_DATA_BASE_RDS)) 
+}
+
+#getCleanBaseDf(reprocess=TRUE)
+
+getRawBaseDf <- function(){
+    read_csv(FILE_CLEAN_DATA_BASE_CSV) %>% 
+    select(- contains('_')) ->
+    ret
+    
+    return(ret)
+}
 
 
-# Load back data ----------------------------------------------------------
-DF_Data_0_ALL <- readRDS(FILE_CLEAN_DATA_BASE_RDS)
-
+# Evaluation tool ---------------------------------------------------------
 source('c_evaluation.R', local= TRUE)
-
-
