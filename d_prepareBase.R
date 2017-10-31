@@ -1,4 +1,4 @@
-VAR_BEFORE <- ls()
+.VAR_BEFORE <- ls()
 
 # Descritpion from https://github.com/IamGianluca/titanic
 # This is an analysis based on the data made available by Kaggle
@@ -180,4 +180,5 @@ write_csv(df_GroundTruth, FILE_CLEAN_DATA_GROUND_TRUTH)
 
 
 # Clean up ----------------------------------------------------------------
-rm(list = setdiff(ls(), VAR_BEFORE))
+rm(list = setdiff(ls(), .VAR_BEFORE))
+rm(.VAR_BEFORE)
