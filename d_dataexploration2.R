@@ -5,7 +5,7 @@ FILE_RAW_DATA_BASE_DR2_RDS     <- file.path(DIR_MIDPUT, 'datareview2.RDS')
 .VAR_BEFORE <- ls()
 #  ------------------------------------------------------------------------
 # Blog post: Logistic Regressions and Subset Selection for the Titanic Kaggle Competition
-# Source: https://www.kaggle.com/swamysm/random-forest-logistic-r-decison-t-svm-for-titanic
+# Source: https://www.kaggle.com/swamysm/beginners-titanic
 # Data Exploration part
 #  ------------------------------------------------------------------------
 
