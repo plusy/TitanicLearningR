@@ -73,22 +73,6 @@ ggplot(full[1:891,], aes(x = Fsize, fill = factor(Survived))) +
     labs(x = 'Family Size') +
     theme_few()
 
-# Since their fare was $80 for 1st class, they most likely embarked from 'C'
-full$Embarked[c(62, 830)] <- 'C'
-
-
-# Show row 1044.
-full[1044, ]
-
-ggplot(full[full$Pclass == '3' & full$Embarked == 'S', ], 
-       aes(x = Fare)) +
-    geom_density(fill = '#99d6ff', alpha=0.4) + 
-    geom_vline(aes(xintercept=median(Fare, na.rm=T)),
-               colour='red', linetype='dashed', lwd=1) +
-    scale_x_continuous(labels=dollar_format()) +
-    theme_few()
-
-
 
 # Discretize family size
 full$FsizeD[full$Fsize == 1] <- 'singleton'
@@ -99,7 +83,6 @@ full$FsizeD[full$Fsize > 4] <- 'large'
 mosaicplot(table(full$FsizeD, 
                  full$Survived), 
            main='Family Size by Survival', shade=TRUE)
-
 
 
 # 2.3 Treat a few more variables … ----------------------------------------
