@@ -1,8 +1,8 @@
 # !diagnostics off
-library(tidyverse)
-library(purrrlyr)
-library(stringr)
-library(microbenchmark)
+library(tidyverse, pos = 100)
+library(purrrlyr, pos = 101)
+library(stringr, pos = 102)
+library(microbenchmark, pos = 103)
 
 
 # Set up dir ------------------------------------------------------------------
