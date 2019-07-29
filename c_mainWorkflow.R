@@ -1,19 +1,5 @@
-# !diagnostics off
-library(tidyverse, pos = 100)
-library(purrrlyr, pos = 101)
-library(stringr, pos = 102)
-library(microbenchmark, pos = 103)
-
-
-# Set up dir ------------------------------------------------------------------
-DIR_PRJBASE <- 'D:/daSpace/workshop/Kaggle/Titanic/shop'
-
-DIR_SCRIPT <- file.path(DIR_PRJBASE, 'script')
-setwd(DIR_SCRIPT)
-
-DIR_INPUT <- file.path(DIR_PRJBASE, 'input')
-DIR_MIDPUT <- file.path(DIR_PRJBASE, 'midput')
-DIR_OUTPUT <- file.path(DIR_PRJBASE, 'output')
+source('c_prjdefult.R', local = TRUE)
+source('c_evaluation.R', local= TRUE)
 
 
 # Data steps --------------------------------------------------------------
@@ -53,7 +39,3 @@ getRawBaseDf <- function(){
     
     return(ret)
 }
-
-
-# Evaluation tool ---------------------------------------------------------
-source('c_evaluation.R', local= TRUE)
