@@ -6,7 +6,9 @@ library(yaml)
 # Set up dir ------------------------------------------------------------------
 FILE_NAME_PRJ_CFG <- 'projectcfg.txt'
 
-prjCfg <- read_yaml(file.path('..', FILE_NAME_PRJ_CFG))
+prjCfg <- tryCatch(read_yaml(FILE_NAME_PRJ_CFG),
+                   error=function(e) NULL)
+stopifnot(!is.null(prjCfg))
 
 DIR_PRJBASE <- prjCfg$project$root_dir
 
